@@ -1,0 +1,98 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Github User Search</h1>
+    <form method="post">
+        <div class="input-group mb-3">
+            <input type="text" asp-for="UserQuery" class="form-control" placeholder="Github username" aria-label="Search Input" aria-describedby="search-button">
+            <button class="btn btn-outline-secondary" type="submit" id="search-button">Search</button>
+        </div>
+    </form>
+    <form method="post">
+        @if (Model.FoundUsers.Count() > 0)
+        {
+            <table id="resultsTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th class="th-sm">
+                            Avatar
+                        </th>
+                        <th class="th-sm">
+                            Id
+                        </th>
+                        <th class="th-sm">
+                            Login
+                        </th>
+                        <th class="th-sm">
+                            Url
+                        </th>
+                        <th class="th-sm">
+                            Followers
+                        </th>
+                        <th class="th-sm">
+                            Following
+                        </th>
+                        <th class="th-sm">
+                            Admin
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var User in Model.FoundUsers)
+                    {
+                        <tr>
+                            <td><img src=@User.Avatar width="100px" height="100px" /></td>
+                            <td>@User.Id</td>
+                            <td>@User.Login</td>
+                            <td><a href=@User.Url>@User.Login</a></td>
+                            <td>@User.Followers</td>
+                            <td>@User.Following</td>
+                            <td>@User.SiteAdmin</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            
+            @*var prevDisabled = !Model.Results.HasPreviousPage ? "disabled" : "";
+            var nextDisabled = !Model.Results.HasNextPage ? "disabled" : "";
+
+            <nav aria-label="Pagination" class="col-12">
+                <ul class="pagination justify-content-end">
+                    <li class="page-item @prevDisabled">
+                        <a class="page-link"
+                           asp-page="./MyPage"
+                           asp-route-pageIndex="@(Model.Results.PageIndex - 1)"
+                           aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                            <span class="sr-only">Previous</span>
+                        </a>
+                    </li>
+                    @foreach (var i in Model.Results.PageIndexesToDisplay)
+                    {
+                        var activeClass = i.IsActive ? "active" : "";
+
+                        <li class="page-item @activeClass">
+                            <a class="page-link"
+                               asp-page="./DividendPicks"
+                               asp-route-pageIndex="@(i.Index)">@i.Index</a>
+                        </li>
+                    }
+                    <li class="page-item @nextDisabled">
+                        <a class="page-link"
+                           asp-page="./MyPage"
+                           asp-route-pageIndex="@(Model.Results.PageIndex + 1)"
+                           aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                            <span class="sr-only">Next</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>*@
+        }
+    </form>
+</div>
+    
